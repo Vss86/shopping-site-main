@@ -1,37 +1,41 @@
-let shoppingCart = document.getElementById("shopping-cart")
+import * as model from "./model.js";
+import cartView from "./views/cartView.js";
+
+let shoppingCart = document.getElementById("shopping-cart");
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
+const generatePage = function () {
+  cartView.generateCartItems(model.cart.items);
+  cartView.updateCartAmount(model.cart.totalItems);
+  cartView.updateCartTotal(model.getCartTotal());
+};
 
-// Produktdatat finns i variabeln shopData (se data.js)
+const controlAddRemoveItem = (id, action) => {
+  const index = model.getIndexByID(id);
+  action === "add" ? model.addToCart(id) : model.removeFromCart(id);
+  cartView.updateCartAmount(model.cart.totalItems);
+  cartView.updateItemAmount(id, model.cart.items[index].numItems);
+  cartView.updateItemTotalPrice(id, model.calcItemTotalPrice(index));
+  cartView.updateCartTotal(model.getCartTotal());
+};
 
+const controlDeleteFromCart = function (id) {
+  model.deleteFromCart(id);
+  generatePage();
+};
 
-const generateCartItems = () => {
-    // Generera alla produkter med dynamisk HTML och Array.protype.map() samt join()
-    //
-    // Använd denna markup för varje produktkort - den korresponderar mot CSS:en
-    //
-    // <div class="cart-item">
-    // <img width="100" src={--image--} alt="" />
-    // <div class="details">
-    //     <div class="title-price-x">
-    //     <h4 class="title-price">
-    //         <p>{--title--}</p>
-    //         <p class="cart-item-price"> {--price--}</p>
-    //     </h4>
-    //     <i onclick="removeItem({--id--})" class="bi bi-x-lg"></i>
-    //     </div>
-    //     <div class="cart-buttons">
-    //     <div class="buttons">
-    //         <i onclick="decrement({--id--})" class="bi bi-dash-lg"></i>
-    //         <div id={--id--} class="quantity">{--total--}</div>
-    //         <i onclick="increment({--id--})" class="bi bi-plus-lg"></i>
-    //     </div>
-    //     </div>
-    //     <h3> {--total * price--}</h3>
-    // </div>
-    // </div>
- 
-}
+const controlEmptyCart = function () {
+  model.emptyCart();
+  generatePage();
+};
 
-generateCartItems();
+const init = function () {
+  generatePage();
+
+  cartView.addHandlerAddRemoveItem(controlAddRemoveItem);
+  cartView.addHandlerDeleteFromCart(controlDeleteFromCart);
+  cartView.addHandlerEmptyCart(controlEmptyCart);
+};
+
+init();

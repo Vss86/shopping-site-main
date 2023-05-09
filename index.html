@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+    <script
+      defer
+      type="text/JavaScript"
+      src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"
+    ></script>
 
-    <title>Shoppa loss</title>
-</head>
-<body>
-    <div class="navbar">
-        <div class="menu">
-            <i id="close" class="bi bi-x-square hide"></i>
-            <i id="open"  class="bi bi-list"></i>
-        </div>
+    <title>Shop 4 You</title>
+    <link rel="icon" href="./img/rsz_favicon.png" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="navbar">
         <a href="index.html">
-          <h2>Shop 4 U</h2>
+          <h2>Shop 4 You</h2>
         </a>
 
-        <ul class="categories slide" id="categories">
-            <!-- Generera knappar för varje kategori. Ha även med en knapp för "All categories" -->
-            <li>
-                <a href="index.html?category=mens">Men's Clothing</a>
-              </li>
-              <li>
-                  <a href="index.html?category=jewelery">Jewelery</a>
-              </li>
-              <li>
-                  <a href="index.html?category=electronics">Electronics</a>
-              </li>
-              <li>
-              <a href="index.html?category=womens">Women's Clothing</a>
-              </li>
-        </ul>
         <a href="cart.html">
           <div class="cart">
             <i class="bi bi-cart2"></i>
@@ -41,13 +32,18 @@
             <div id="cartAmount" class="cartAmount">0</div>
           </div>
         </a>
-    
       </div>
-    
-      <div class="shop" id="shop">
-        <!-- Generera dynamisk html för alla produkter här -->
+      <div class="categories">
+        Categories
+        <i class="ph-caret-down-bold caret-categories"></i>
+
+        <ul class="categories-list hidden" id="categories"></ul>
       </div>
-    <script src="./js/data.js"></script>
-    <script src="./js/main.js"></script>
-</body>
+    </div>
+
+    <div class="shop" id="shop">
+      <!-- Generera dynamisk html för alla produkter här -->
+    </div>
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
